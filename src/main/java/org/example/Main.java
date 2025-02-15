@@ -1,23 +1,8 @@
 package org.example;
 
-import org.example.enums.Gender;
-import org.example.enums.Operator;
 import org.example.model.Person;
-import org.example.model.Phone;
 
-import java.beans.Encoder;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
-import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
+import java.util.List;
 
 import static org.example.utils.Generator.generatePeople;
 
@@ -27,7 +12,7 @@ public class Main {
 //        people.forEach(System.out::println);
 
         // Получите список Person и отфильтруйте только те, у которых age > n и выведите в консоль.
-//        printPeopleWithAgeHigherX(people, 40);
+        printPeopleWithAgeHigherX(people, 40);
 
         // Получите список Person, отфильтруйте только те, у кого weight > n, преобразуйте в name и выведите в консоль.
 //        printPeopleNameWithWeightHigherX(people, 95);
@@ -74,6 +59,12 @@ public class Main {
 
         // Сгенерируйте миллион рандомных чисел и посчитайте их сумму используя parallelStream с двумя потоками.
 //        printSumOfMillionNumbers();
+    }
+
+    private static void printPeopleWithAgeHigherX(List<Person> people, int age) {
+        people.stream()
+                .filter(person -> person.getAge() > age)
+                .forEach(System.out::println);
     }
 
 }
