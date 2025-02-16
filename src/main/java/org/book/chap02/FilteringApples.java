@@ -2,6 +2,7 @@ package org.book.chap02;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 import java.util.function.Function;
 
@@ -49,6 +50,15 @@ public class FilteringApples {
 
         inventory.forEach(apple -> System.out.println(apple.getWeight()));
         inventory.forEach(apple -> System.out.println(apple.getWeight() > 100 ? "heavy" : "light"));
+
+        inventory.sort(new Comparator<Apple>() {
+            @Override
+            public int compare(Apple o1, Apple o2) {
+                return Integer.compare(o1.getWeight(), o2.getWeight());
+            }
+        });
+
+
     }
 
 

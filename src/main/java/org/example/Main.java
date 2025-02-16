@@ -9,16 +9,16 @@ import static org.example.utils.Generator.generatePeople;
 public class Main {
     public static void main(String[] args) {
         List<Person> people = generatePeople(20);
-//        people.forEach(System.out::println);
+        people.forEach(System.out::println);
 
         // Получите список Person и отфильтруйте только те, у которых age > n и выведите в консоль.
-        printPeopleWithAgeHigherX(people, 40);
+       // printPeopleWithAgeHigherX(people, 40);
 
         // Получите список Person, отфильтруйте только те, у кого weight > n, преобразуйте в name и выведите в консоль.
-//        printPeopleNameWithWeightHigherX(people, 95);
+        //  printPeopleNameWithWeightHigherX(people, 95);
 
         // Получите список Person, отфильтруйте только те, у кого кол-во телефонов > n, преобразуйте в номера телефонов и выведите в консоль.
-//        printPhoneNumbersWithMoreThanXPhones(people,4);
+        printPhoneNumbersWithMoreThanXPhones(people,4);
 
         // Получите список Person, преобразуйте в name и затем преобразуйте в строку, что бы имена были через запятую
 //        printPeopleNamesWithComma(people);
@@ -61,11 +61,27 @@ public class Main {
 //        printSumOfMillionNumbers();
     }
 
+    private static void printPhoneNumbersWithMoreThanXPhones(List<Person> people, int phoneCount ) {
+        people.stream()
+                .filter(person -> person.getPhones().size()>phoneCount)
+                .map(Person::getName)
+                .forEach(System.out::println);
+    }
+
+
     private static void printPeopleWithAgeHigherX(List<Person> people, int age) {
         people.stream()
                 .filter(person -> person.getAge() > age)
                 .forEach(System.out::println);
     }
+
+    private static void printPeopleNameWithWeightHigherX(List<Person> people, int weight) {
+        people.stream()
+                .filter(person -> person.getWeight()>weight)
+                .map(Person::getName)
+                .forEach(System.out::println);
+    }
+
 
 }
 
