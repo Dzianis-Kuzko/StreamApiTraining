@@ -2,7 +2,9 @@ package org.example;
 
 import org.example.model.Person;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.example.utils.Generator.generatePeople;
 
@@ -12,19 +14,19 @@ public class Main {
         people.forEach(System.out::println);
 
         // Получите список Person и отфильтруйте только те, у которых age > n и выведите в консоль.
-       // printPeopleWithAgeHigherX(people, 40);
+        // printPeopleWithAgeHigherX(people, 40);
 
         // Получите список Person, отфильтруйте только те, у кого weight > n, преобразуйте в name и выведите в консоль.
         //  printPeopleNameWithWeightHigherX(people, 95);
 
         // Получите список Person, отфильтруйте только те, у кого кол-во телефонов > n, преобразуйте в номера телефонов и выведите в консоль.
-        printPhoneNumbersWithMoreThanXPhones(people,4);
+        // printPhoneNumbersWithMoreThanXPhones(people,4);
 
         // Получите список Person, преобразуйте в name и затем преобразуйте в строку, что бы имена были через запятую
-//        printPeopleNamesWithComma(people);
+        //printPeopleNamesWithComma(people);
 
         // Получите список Person и отсортируйте их по возрасту в порядке убывания, если возраст равен, то по именам и выведите в консоль.
-//        printSortedDescPeopleByAge(people);
+        printSortedDescPeopleByAge(people);
 
         //  Получите список Person и сгруппируйте их по полу.
 //        printPeopleGroupedByGender(people);
@@ -61,9 +63,25 @@ public class Main {
 //        printSumOfMillionNumbers();
     }
 
-    private static void printPhoneNumbersWithMoreThanXPhones(List<Person> people, int phoneCount ) {
+    private static void printSortedDescPeopleByAge(List<Person> people) {
         people.stream()
-                .filter(person -> person.getPhones().size()>phoneCount)
+                .sorted(Comparator
+                        .comparingInt(Person::getAge).reversed()
+                        .thenComparing(Person::getName))
+                .forEach(System.out::println);
+    }
+
+    private static void printPeopleNamesWithComma(List<Person> people) {
+        String result = people.stream()
+                .map(Person::getName)
+                .collect(Collectors.joining(", "));
+
+        System.out.println(result);
+    }
+
+    private static void printPhoneNumbersWithMoreThanXPhones(List<Person> people, int phoneCount) {
+        people.stream()
+                .filter(person -> person.getPhones().size() > phoneCount)
                 .map(Person::getName)
                 .forEach(System.out::println);
     }
@@ -77,7 +95,7 @@ public class Main {
 
     private static void printPeopleNameWithWeightHigherX(List<Person> people, int weight) {
         people.stream()
-                .filter(person -> person.getWeight()>weight)
+                .filter(person -> person.getWeight() > weight)
                 .map(Person::getName)
                 .forEach(System.out::println);
     }
