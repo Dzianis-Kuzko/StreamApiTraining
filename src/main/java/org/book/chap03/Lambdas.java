@@ -52,7 +52,7 @@ public class Lambdas {
 
 
         Function<String, String> addHeader = Letter::addHeader;
-        Function<String, String > transFormationPipeline = addHeader.andThen(Letter::addFooter)
+        Function<String, String> transFormationPipeline = addHeader.andThen(Letter::addFooter);
 
 
     }
