@@ -1,9 +1,11 @@
 package org.example;
 
+import org.example.enums.Gender;
 import org.example.model.Person;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import static org.example.utils.Generator.generatePeople;
@@ -11,7 +13,7 @@ import static org.example.utils.Generator.generatePeople;
 public class Main {
     public static void main(String[] args) {
         List<Person> people = generatePeople(20);
-        people.forEach(System.out::println);
+        // people.forEach(System.out::println);
 
         // Получите список Person и отфильтруйте только те, у которых age > n и выведите в консоль.
         // printPeopleWithAgeHigherX(people, 40);
@@ -26,10 +28,10 @@ public class Main {
         //printPeopleNamesWithComma(people);
 
         // Получите список Person и отсортируйте их по возрасту в порядке убывания, если возраст равен, то по именам и выведите в консоль.
-        printSortedDescPeopleByAge(people);
+        //printSortedDescPeopleByAge(people);
 
         //  Получите список Person и сгруппируйте их по полу.
-//        printPeopleGroupedByGender(people);
+        printPeopleGroupedByGender(people);
 
         // Получите список Person и проверьте есть ли в этом списке человек, у которого номер телефона N значению.
 //        printIsPersonExistWhoseNumberX(people, "+3750771863161");
@@ -61,6 +63,23 @@ public class Main {
 
         // Сгенерируйте миллион рандомных чисел и посчитайте их сумму используя parallelStream с двумя потоками.
 //        printSumOfMillionNumbers();
+    }
+
+    private static void printPeopleGroupedByGender(List<Person> people) {
+//        people.stream()
+//                .collect(Collectors.groupingBy(Person::getGender))
+//                .entrySet()
+//                .forEach(System.out::println);
+//
+
+        Map<Gender, List<Person>> groupedByGender = people.stream()
+                .collect(Collectors.groupingBy(Person::getGender));
+
+        groupedByGender.forEach((gender, personList) -> {
+            System.out.println("Gender: " + gender);
+            personList.forEach(System.out::println);
+        });
+
     }
 
     private static void printSortedDescPeopleByAge(List<Person> people) {
