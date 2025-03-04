@@ -29,27 +29,52 @@ public class Test {
         sortedTransactionBySum.forEach(System.out::println);
         //2. Вывести список неповторяющихся городов, в которых работают трейдеры.
         transactions.stream()
-                .map(tr-> tr.getTrader().getCity())
+                .map(tr -> tr.getTrader().getCity())
                 .distinct()
                 .forEach(System.out::println);
 
         //3. Найти всех трейдеров из Кембриджа и отсортировать их по именам.
         List<Trader> tradesFromCambridge = transactions.stream()
-                .filter(tr-> tr.getTrader().getCity().equals("Cambridge"))
+                .filter(tr -> tr.getTrader().getCity().equals("Cambridge"))
                 .map(Transaction::getTrader)
                 .distinct()
                 .sorted(comparing(Trader::getName))
                 .toList();
         tradesFromCambridge.forEach(System.out::println);
 
-
-
         //4. Вернуть строку со всеми именами трейдеров, отсортированными в алфавитном
         //порядке.
+
+        String names = transactions.stream()
+                .map(tr -> tr.getTrader().getName())
+                .sorted()
+                .collect(Collectors.joining(", "));
+        System.out.println(names);
+
+
         //5. Выяснить, существует ли хоть один трейдер из Милана.
+        boolean anyTrader = transactions.stream()
+                .anyMatch(tr -> tr.getTrader().getCity().equals("Milan"));
+
+        System.out.println(anyTrader);
+
         //6. Вывести суммы всех транзакций трейдеров из Кембриджа.
+        transactions.stream()
+                .filter(tr -> tr.getTrader().getCity().equals("Cambridge"))
+                .map(Transaction::getValue)
+                .forEach(System.out::println);
+
+
         //7. Какова максимальная сумма среди всех транзакций?
+        transactions.stream()
+                .max(comparing(Transaction::getValue))
+                .ifPresent(transaction -> System.out.println(transaction.getValue()));
+
+
         //8. Найти транзакцию с минимальной суммой.
 
+        transactions.stream()
+                .min(comparing(Transaction::getValue))
+                .ifPresent(transaction -> System.out.println(transaction.getValue()));
     }
 }
