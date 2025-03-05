@@ -67,8 +67,9 @@ public class Test {
 
         //7. Какова максимальная сумма среди всех транзакций?
         transactions.stream()
-                .max(comparing(Transaction::getValue))
-                .ifPresent(transaction -> System.out.println(transaction.getValue()));
+                .mapToInt(Transaction::getValue)
+                .max()
+                .ifPresent(System.out::println);
 
 
         //8. Найти транзакцию с минимальной суммой.
