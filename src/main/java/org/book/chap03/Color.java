@@ -1,6 +1,6 @@
 package org.book.chap03;
 
-enum Color {
+public enum Color {
   RED,
   GREEN
 }
